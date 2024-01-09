@@ -1,3 +1,8 @@
+## v0.0.3 (2024-01-09)
+
+
+- fix: wrong script runnin on jkdiff-folder hook (#4)
+
 ## v0.0.2 (2024-01-09)
 
 
