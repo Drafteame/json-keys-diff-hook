@@ -7,7 +7,7 @@
 
 -   id: jkdiff-folder
     name: 'json-keys-diff folder'
-    entry: run-jkdiff-files.sh
+    entry: run-jkdiff-folder.sh
     files: '.*'
     language: 'script'
     description: "Runs `jkdiff folder` command, requires json-keys-diff package from NPM"
