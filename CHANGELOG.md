@@ -1,3 +1,8 @@
+## v0.0.2 (2024-01-09)
+
+
+- fix: wrong precommit matching files configuration (#3)
+
 ## v0.0.1 (2024-01-09)
 
 
