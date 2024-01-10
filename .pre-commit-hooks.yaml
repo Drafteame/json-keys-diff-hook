@@ -3,6 +3,7 @@
     entry: run-jkdiff-files.sh
     files: '.*'
     language: 'script'
+    pass_filenames: true
     description: "Runs `jkdiff files` command, requires json-keys-diff package from NPM"
 
 -   id: jkdiff-folder
@@ -10,4 +11,5 @@
     entry: run-jkdiff-folder.sh
     files: '.*'
     language: 'script'
+    pass_filenames: true
     description: "Runs `jkdiff folder` command, requires json-keys-diff package from NPM"

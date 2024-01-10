@@ -1,36 +1,42 @@
 #!/usr/bin/env bash
 
-# Verificar que se haya proporcionado una expresión regular como argumento
-if [ "$#" -eq 0 ]; then
-  echo "Por favor, proporciona una expresión regular como argumento para ejecutar jkdiff."
-  exit 1
-fi
+match=".*"
+staged_files=()
 
-# Obtener la expresión regular del primer argumento
-regex="$1"
-shift
+# Parse command-line options
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    --match=*)
+      match="${1#*=}"
+      ;;
+    --match)
+      match="$2"
+      shift
+      ;;
+    *)
+      # Assume the remaining arguments are staged files
+      staged_files+=("$1")
+      ;;
+  esac
+  shift
+done
 
-# Obtener la lista de archivos modificados por el commit
-files=$(git diff --cached --name-only --diff-filter=ACM)
-
-# Filtrar los archivos con la expresión regular proporcionada
+# Filter files with the specified regular expression
 filtered_files=()
-for file in $files; do
-  if [[ $file =~ $regex ]]; then
+for file in "${staged_files[@]}"; do
+  if [[ $file =~ $match ]]; then
     filtered_files+=("$file")
   fi
 done
 
-# Verificar si hay archivos para comparar
+# Check if there are filtered files
 if [ ${#filtered_files[@]} -eq 0 ]; then
   exit 0
 fi
 
-# Ejecutar jkdiff con los archivos obtenidos
+# Execute jkdiff with the filtered files
 jkdiff_cmd=("jkdiff" "files" "${filtered_files[@]}")
 "${jkdiff_cmd[@]}"
 
-echo
-
-# Salir con el estado de salida del último comando ejecutado
+# Exit with the exit status of the last executed command
 exit $?
