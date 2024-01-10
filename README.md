@@ -14,7 +14,7 @@ the project.
   rev: main
   hooks:
     - id: jkdiff-files
-      args: '"json$"' # Regexp to match file names (including path)
+      args: ["--match=json$"] # Regexp to match file names including path. (default 'json$')
 ```
 
 ### Validate matching files per folder
@@ -27,5 +27,5 @@ folder will be compared between each other.
   rev: main
   hooks:
     - id: jkdiff-folder
-      args: '"json$"' # Regexp to match file names (including path)
+      args: ["--match=json$"] # Regexp to match file names including path. (default 'json$')
 ```
